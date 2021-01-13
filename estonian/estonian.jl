@@ -87,24 +87,60 @@ acc_learn_train = JudiLing.eval_acc(
   verbose=false
 )
 
-println("Acc for learn: $acc_learn_train")
+# we calculate learn_paths and build_paths function
+res_learn_val, gpi_learn_val = JudiLing.learn_paths(
+  estonian_train,
+  estonian_val,
+  cue_obj_train.C,
+  S_val,
+  F_train,
+  Chat_val,
+  A_train,
+  cue_obj_train.i2f,
+  cue_obj_train.f2i, # api changed in 0.3.1
+  check_gold_path=true,
+  gold_ind=cue_obj_val.gold_ind,
+  Shat_val=Shat_val,
+  max_t=max_t,
+  max_can=10,
+  grams=3,
+  threshold=0.05,
+  is_tolerant=true,
+  tolerance=-0.1,
+  max_tolerance=3,
+  tokenized=false,
+  keep_sep=false,
+  target_col=:Word,
+  verbose=true)
 
-df_learn_train = JudiLing.write2df(
+acc_learn_val = JudiLing.eval_acc(
+  res_learn_val,
+  cue_obj_val.gold_ind,
+  verbose=false
+)
+
+JudiLing.write2csv(
   res_learn_train,
   estonian_train,
   cue_obj_train,
   cue_obj_train,
+  "estonian_learn_res_train.csv",
   grams=3,
   tokenized=false,
   sep_token=nothing,
   start_end_token="#",
   output_sep_token="",
   path_sep_token=":",
-  target_col=:Word
+  target_col=:Word,
+  root_dir=@__DIR__,
+  output_dir="out"
   )
 
-df_learn_gpi_train = JudiLing.write2df(
+JudiLing.write2csv(
   gpi_learn_train,
+  "latin_learn_gpi_train.csv",
+  root_dir=@__DIR__,
+  output_dir="out"
   )
 
 JudiLing.write2csv(
@@ -121,12 +157,115 @@ JudiLing.write2csv(
   path_sep_token=":",
   target_col=:Word,
   root_dir=@__DIR__,
-  output_dir="estonian_out"
+  output_dir="out"
   )
 
 JudiLing.write2csv(
-  gpi_learn,
-  "latin_learn_gpi_train.csv",
+  gpi_learn_train,
+  "estonian_learn_gpi_train.csv",
   root_dir=@__DIR__,
-  output_dir="estonian_out"
+  output_dir="out"
   )
+
+JudiLing.write2csv(
+  res_learn_val,
+  estonian_val,
+  cue_obj_train,
+  cue_obj_val,
+  "estonian_learn_res_val.csv",
+  grams=3,
+  tokenized=false,
+  sep_token=nothing,
+  start_end_token="#",
+  output_sep_token="",
+  path_sep_token=":",
+  target_col=:Word,
+  root_dir=@__DIR__,
+  output_dir="out"
+  )
+
+JudiLing.write2csv(
+  gpi_learn_val,
+  "estonian_learn_gpi_val.csv",
+  root_dir=@__DIR__,
+  output_dir="out"
+  )
+
+res_build_train = JudiLing.build_paths(
+    estonian_train,
+    cue_obj_train.C,
+    S_train,
+    F_train,
+    Chat_train,
+    A_train,
+    cue_obj_train.i2f,
+    cue_obj_train.gold_ind,
+    max_t=max_t,
+    n_neighbors=3,
+    verbose=true
+    )
+
+acc_build_train = JudiLing.eval_acc(
+  res_build_train,
+  cue_obj_train.gold_ind,
+  verbose=false
+)
+
+res_build_val = JudiLing.build_paths(
+    estonian_val,
+    cue_obj_train.C,
+    S_val,
+    F_train,
+    Chat_val,
+    A_train,
+    cue_obj_train.i2f,
+    cue_obj_train.gold_ind,
+    max_t=max_t,
+    n_neighbors=20,
+    verbose=true
+    )
+
+acc_build_val = JudiLing.eval_acc(
+  res_build_val,
+  cue_obj_val.gold_ind,
+  verbose=false
+)
+
+JudiLing.write2csv(
+  res_build_train,
+  estonian_train,
+  cue_obj_train,
+  cue_obj_train,
+  "estonian_build_res_train.csv",
+  grams=3,
+  tokenized=false,
+  sep_token=nothing,
+  start_end_token="#",
+  output_sep_token="",
+  path_sep_token=":",
+  target_col=:Word,
+  root_dir=@__DIR__,
+  output_dir="out"
+  )
+
+JudiLing.write2csv(
+  res_build_val,
+  estonian_val,
+  cue_obj_train,
+  cue_obj_val,
+  "estonian_build_res_val.csv",
+  grams=3,
+  tokenized=false,
+  sep_token=nothing,
+  start_end_token="#",
+  output_sep_token="",
+  path_sep_token=":",
+  target_col=:Word,
+  root_dir=@__DIR__,
+  output_dir="out"
+  )
+
+println("Acc for learn train: $acc_learn_train")
+println("Acc for learn val: $acc_learn_val")
+println("Acc for build train: $acc_build_train")
+println("Acc for build val: $acc_build_val")
