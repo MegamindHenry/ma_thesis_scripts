@@ -27,3 +27,6 @@ Manifest.toml
 data/
 
 .DS_Store
+
+*/out/
+out/
