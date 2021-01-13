@@ -138,7 +138,7 @@ JudiLing.write2csv(
 
 JudiLing.write2csv(
   gpi_learn_train,
-  "latin_learn_gpi_train.csv",
+  "estonian_learn_gpi_train.csv",
   root_dir=@__DIR__,
   output_dir="out"
   )
@@ -265,7 +265,10 @@ JudiLing.write2csv(
   output_dir="out"
   )
 
-println("Acc for learn train: $acc_learn_train")
-println("Acc for learn val: $acc_learn_val")
-println("Acc for build train: $acc_build_train")
-println("Acc for build val: $acc_build_val")
+mkpath(joinpath(@__DIR__,"out"))
+fio = open(joinpath(@__DIR__,"out", "acc.out"), "w")
+println(fio, "Acc for learn train: $acc_learn_train")
+println(fio, "Acc for learn val: $acc_learn_val")
+println(fio, "Acc for build train: $acc_build_train")
+println(fio, "Acc for build val: $acc_build_val")
+close(fio)

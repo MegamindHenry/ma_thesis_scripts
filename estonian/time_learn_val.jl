@@ -89,7 +89,7 @@ end
 b = @benchmarkable run_test() samples=1
 r = run(b)
 mkpath(joinpath(@__DIR__,"out"))
-fio = open(joinpath(@__DIR__,"out", "time_build_val.out"), "w")
+fio = open(joinpath(@__DIR__,"out", "time_learn_val.out"), "w")
 write(fio, "time: $(time(r)/1e9)s\n")
 write(fio, "memory: $(memory(r)/1e9)GB\n")
 close(fio)
