@@ -1,3 +1,7 @@
+using JudiLing # our package
+using CSV # read csv files into dataframes
+using BenchmarkTools
+using Random
 
 # load latin file
 french = CSV.DataFrame!(CSV.File(joinpath(@__DIR__, "data", "french.csv")))

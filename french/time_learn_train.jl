@@ -9,7 +9,7 @@ function run_test()
   # shuffle data
   rng = MersenneTwister(314)
   french = french[shuffle(rng, 1:size(french, 1)),:]
-  french = french[1:2500,:]
+  # french = french[1:2500,:]
   sr = 0.2
   n = size(french, 1)
   tv = convert(Int64, floor(n*sr))
@@ -86,7 +86,7 @@ function run_test()
     max_t=max_t,
     max_can=10,
     grams=2,
-    threshold=0.5, # 0.05345303464774335
+    threshold=0.1, # 0.05345303464774335
     tokenized=true,
     sep_token="-",
     keep_sep=true,

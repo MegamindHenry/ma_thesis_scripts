@@ -9,7 +9,7 @@ function run_test()
   # shuffle data
   rng = MersenneTwister(314)
   french = french[shuffle(rng, 1:size(french, 1)),:]
-  french = french[1:2500,:]
+  # french = french[1:2500,:]
   sr = 0.2
   n = size(french, 1)
   tv = convert(Int64, floor(n*sr))

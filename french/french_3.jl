@@ -23,6 +23,7 @@ res_learn_val, gpi_learn_val = JudiLing.learn_paths(
   sep_token="-",
   keep_sep=true,
   target_col=:Syllables,
+  sparse_ratio=0.05,
   verbose=true)
 
 acc_learn_val = JudiLing.eval_acc(

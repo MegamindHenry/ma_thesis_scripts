@@ -20,6 +20,7 @@ res_learn_train, gpi_learn_train = JudiLing.learn_paths(
   sep_token="-",
   keep_sep=true,
   target_col=:Syllables,
+  sparse_ratio=0.05,
   verbose=true)
 
 acc_learn_train = JudiLing.eval_acc(
