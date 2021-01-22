@@ -10,9 +10,10 @@ function run_test()
   rng = MersenneTwister(314)
   french = french[shuffle(rng, 1:size(french, 1)),:]
   # french = french[1:2500,:]
-  sr = 0.2
-  n = size(french, 1)
-  tv = convert(Int64, floor(n*sr))
+  # sr = 0.2
+  # n = size(french, 1)
+  # tv = convert(Int64, floor(n*sr))
+  tv = 1000
   french_train = french[1:end-tv,:]
   french_val = french[end-tv+1:end,:]
   # display(latin)
