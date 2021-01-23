@@ -90,7 +90,7 @@ function run_test()
     threshold=0.1,
     is_tolerant=true,
     tolerance=-0.1,
-    max_tolerance=2,
+    max_tolerance=3,
     tokenized=true,
     sep_token="-",
     keep_sep=true,
