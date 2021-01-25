@@ -5,19 +5,8 @@ using Random
 
 function run_test()
   # load latin file
-  french = CSV.DataFrame!(CSV.File(joinpath(@__DIR__, "data", "french.csv")))
-  # shuffle data
-  rng = MersenneTwister(314)
-  french = french[shuffle(rng, 1:size(french, 1)),:]
-  # french = french[1:2500,:]
-  # french = french[1:2500,:]
-  # sr = 0.2
-  # n = size(french, 1)
-  # tv = convert(Int64, floor(n*sr))
-  tv = 1000
-  french_train = french[1:end-tv,:]
-  french_val = french[end-tv+1:end,:]
-  # display(latin)
+  french_train = CSV.DataFrame!(CSV.File(joinpath(@__DIR__, "data", "french_train.csv")))
+  french_val = CSV.DataFrame!(CSV.File(joinpath(@__DIR__, "data", "french_val.csv")))
 
   # create C matrixes for training datasets
   cue_obj_train, cue_obj_val = JudiLing.make_combined_cue_matrix(
