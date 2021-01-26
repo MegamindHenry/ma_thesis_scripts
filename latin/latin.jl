@@ -138,6 +138,23 @@ JudiLing.write2csv(
   )
 
 JudiLing.write2csv(
+  res_build,
+  latin,
+  cue_obj,
+  cue_obj,
+  "latin_build_res.csv",
+  grams=3,
+  tokenized=false,
+  sep_token=nothing,
+  start_end_token="#",
+  output_sep_token="",
+  path_sep_token=":",
+  target_col=:Word,
+  root_dir=@__DIR__,
+  output_dir="latin_out"
+  )
+
+JudiLing.write2csv(
   gpi_learn,
   "latin_learn_gpi.csv",
   root_dir=@__DIR__,
