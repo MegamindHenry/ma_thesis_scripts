@@ -1,5 +1,6 @@
 using JudiLing # our package
 using CSV # read csv files into dataframes
+using Random
 using BenchmarkTools
 
 # load latin file
