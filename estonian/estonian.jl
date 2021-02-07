@@ -55,6 +55,15 @@ Shat_val = cue_obj_val.C * F_train
 # here we only use a adjacency matrix as we got it from training dataset
 A_train = cue_obj_train.A
 
+A = JudiLing.make_combined_adjacency_matrix(
+  estonian_train,
+  estonian_val,
+  grams=3,
+  target_col=:Word,
+  tokenized=false,
+  keep_sep=false
+  )
+
 # we calculate how many timestep we need for learn_paths and huo function
 max_t = JudiLing.cal_max_timestep(estonian_train, estonian_val, :Word)
 
